@@ -1,4 +1,7 @@
-import dataProvider, { GraphQLClient } from "@refinedev/nestjs-query";
+import dataProvider, {
+  GraphQLClient,
+  liveProvider as graphyqlLiveProvider,
+} from "@refinedev/nestjs-query";
 import { fetchWrapper } from "./fetch-wrapper";
 import { createClient } from "graphql-ws";
 
@@ -33,3 +36,6 @@ export const wsClient =
     : undefined;
 
 export const graphyqlDataProvider = dataProvider(client);
+export const liveProvider = wsClient
+  ? graphyqlLiveProvider(wsClient)
+  : undefined;
